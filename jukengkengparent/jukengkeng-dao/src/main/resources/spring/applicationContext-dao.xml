@@ -32,6 +32,6 @@
 	</bean>
 	<!-- 扫描包，记得改 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.pinyougou.mapper" />
+		<property name="basePackage" value="com.jukengkeng.mapper" />
 	</bean>
 </beans>
