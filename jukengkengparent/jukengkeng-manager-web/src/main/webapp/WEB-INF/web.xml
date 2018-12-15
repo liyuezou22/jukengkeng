@@ -24,9 +24,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     <servlet>
         <servlet-name>springmvc</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet
-        </servlet-class
-
-        >
+        </servlet-class>
         <!-- 指定加载的配置文件 ，通过参数 contextConfigLocation 加载-->
         <init-param>
             <param-name>contextConfigLocation</param-name>
