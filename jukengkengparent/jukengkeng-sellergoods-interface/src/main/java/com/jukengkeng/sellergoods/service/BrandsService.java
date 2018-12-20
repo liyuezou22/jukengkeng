@@ -10,4 +10,6 @@ public interface BrandsService {
     public List<TbBrand> findAll();
      //查询分页数据
     public pageResult findPageList(int pageNum,int pageSize);
+    //保存商品信息
+    public void saveBrand(TbBrand tbBrand);
 }

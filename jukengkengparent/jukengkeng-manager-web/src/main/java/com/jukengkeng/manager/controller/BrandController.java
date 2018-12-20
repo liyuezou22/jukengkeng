@@ -4,6 +4,8 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.jukengkeng.pojo.TbBrand;
 import com.jukengkeng.sellergoods.service.BrandsService;
 import entity.pageResult;
+import entity.result;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,5 +27,16 @@ public class BrandController {
     public pageResult findPageList(int pageNum,int pageSize){
        pageResult pageResult =  brandsService.findPageList(pageNum,pageSize);
        return  pageResult;
+    }
+    @RequestMapping("/add")
+    public result add(@RequestBody TbBrand tbBrand){
+        try {
+            brandsService.saveBrand(tbBrand);
+            return new result(true,"保存成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            return  new result(false,"保存失败");
+        }
+
     }
 }

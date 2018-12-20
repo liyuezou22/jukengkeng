@@ -27,4 +27,9 @@ public class BrandServiceImpl implements BrandsService {
         Page<TbBrand> page = (Page<TbBrand>) tbBrandMapper.selectByExample(null);
         return new pageResult(page.getTotal(),page.getResult());
     }
+
+    @Override
+    public void saveBrand(TbBrand tbBrand) {
+        tbBrandMapper.insert(tbBrand);
+    }
 }
