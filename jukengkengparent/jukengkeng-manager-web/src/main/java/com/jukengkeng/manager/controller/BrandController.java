@@ -8,9 +8,7 @@ import entity.result;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
-
 
 @RestController
 @RequestMapping("brands")
@@ -37,6 +35,21 @@ public class BrandController {
             e.printStackTrace();
             return  new result(false,"保存失败");
         }
-
     }
+    @RequestMapping("/findTbBrand")
+    public TbBrand findTbBrand(Long rowid){
+        TbBrand tbBrand = brandsService.findTbBrand(rowid);
+        return tbBrand;
+    }
+    @RequestMapping("/updateTbBrand")
+    public result updateTbBrand(TbBrand tbBrand){
+        try {
+            brandsService.updateTbBrand(tbBrand);
+            return new result(true,"修改成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            return new result(false,"修改失败");
+        }
+    }
+
 }
