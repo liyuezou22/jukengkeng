@@ -15,4 +15,8 @@ public interface BrandsService {
     public TbBrand findTbBrand(Long id);
     //修改商品
     public void updateTbBrand(TbBrand tbBrand);
+    //删除商品
+    public void deleteTbBrands(Long[] ids);
+    //模糊查询
+    public pageResult findPageListByLike(TbBrand tbBrand,int pageNum,int pageSize);
 }

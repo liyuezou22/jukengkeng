@@ -5,9 +5,11 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.jukengkeng.mapper.TbBrandMapper;
 import com.jukengkeng.pojo.TbBrand;
+import com.jukengkeng.pojo.TbBrandExample;
 import com.jukengkeng.sellergoods.service.BrandsService;
 import entity.pageResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.support.lob.LobCreator;
 
 import java.util.List;
 
@@ -42,5 +44,32 @@ public class BrandServiceImpl implements BrandsService {
     @Override
     public void updateTbBrand(TbBrand tbBrand) {
         tbBrandMapper.updateByPrimaryKey(tbBrand);
+    }
+
+    @Override
+    public void deleteTbBrands(Long[] ids) {
+        for (Long id:ids) {
+            tbBrandMapper.deleteByPrimaryKey(id);
+        }
+    }
+
+    @Override
+    public pageResult findPageListByLike(TbBrand tbBrand, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        TbBrandExample example = new TbBrandExample();
+        TbBrandExample.Criteria criteria = example.createCriteria(); //创建条件
+        if(tbBrand != null){
+            if(tbBrand.getName()!=null && tbBrand.getName().length()>0){
+                criteria.andNameLike("%"+tbBrand.getName()+"%");
+            }
+            if(tbBrand.getFirstChar()!=null && tbBrand.getFirstChar().length()>0){
+                criteria.andFirstCharLike("%"+tbBrand.getFirstChar()+"%");
+            }
+
+        }
+
+        Page<TbBrand> tbBrands = (Page<TbBrand>) tbBrandMapper.selectByExample(example);
+
+        return new pageResult(tbBrands.getTotal(),tbBrands.getResult());
     }
 }

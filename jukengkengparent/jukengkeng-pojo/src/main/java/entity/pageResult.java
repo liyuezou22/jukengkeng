@@ -9,7 +9,7 @@ import java.util.List;
  * rows：所查询页数的记录数
  * */
 public class pageResult implements Serializable {
-    private long total;
+      private long total;
     private List rows;
 
     public pageResult(long total, List rows) {
