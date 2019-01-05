@@ -15,106 +15,11 @@
     <!-- 引入分页控件 -->
     <script src="../plugins/angularjs/pagination.js"></script>
     <link rel="stylesheet" href="../plugins/angularjs/pagination.css">
-
-    <script>
-        //定义模块
-        var app = angular.module("jukengkeng", ['pagination']); //引入分页模块
-        //定义控制器
-        app.controller("jkkController", function ($scope, $http) {
-            //获取商品列表
-            $http.post("http://localhost:9101/brands/findAll.do").success(function (response) {
-                $scope.list = response;
-            });
-
-            //分页控件配置
-            $scope.paginationConf = {
-                currentPage: 1,
-                totalItems: 10,
-                itemsPerPage: 10,
-                perPageOptions: [10, 20, 30, 40, 50],
-                onChange: function () {
-                    $scope.reloadList();
-                }
-            };
-
-            // //获取分页数据
-            // $scope.findPageList = function (pageNum, pageSize) {
-            //     $http.post("../brands/findPageList.do?pageNum=" + pageNum + "&&pageSize=" + pageSize).success(function (response) {
-            //         $scope.list = response.rows;
-            //         $scope.paginationConf.totalItems = response.total;
-            //     });
-            // };
-
-            //初始化加载
-            $scope.reloadList = function () {
-                debugger
-                //$scope.findPageList($scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage);
-                $scope.queryList($scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage);
-            };
-
-            //新增
-            $scope.add = function () {
-                //判断是否存在ID，如果ID不为空则进行更新操作，如果ID为空则进行新增
-                var method = "add";
-                var id = $scope.entity.id;
-                if (id != null) {
-                    method = "updateTbBrand";
-                }
-                $http.post("../brands/" + method + ".do", $scope.entity).success(function (response) {
-                    if (response.flag) {
-                        $scope.reloadList(); //刷新列表
-                        alert(response.message);
-                    } else {
-                        alert(response.message);
-                    }
-                });
-            };
-
-            //根据主键查询
-            $scope.findByID = function (id) {
-                $http.post("../brands/findTbBrand.do?rowid=" + id).success(function (response) {
-                    $scope.entity = response;
-                });
-            };
-
-            //定义数组
-            $scope.selectIds = [];
-            //判断chackbox是否勾选，如果勾选就将当前行ID存到数组中，如果取消勾选就将ID从数组中移除
-            $scope.updateSelectState = function ($event, id) {
-                if ($event.target.checked) {
-                    //在数组中添加主键值
-                    $scope.selectIds.push(id);
-                } else {
-                    //取消勾选
-                    //获取ID在索引中的位置，并删除
-                    var index = $scope.selectIds.indexOf(id);
-                    $scope.selectIds.splice(index, 1);
-                }
-            };
-
-            //删除
-            $scope.del = function () {
-                $http.post("../brands/del.do?ids=" + $scope.selectIds).success(function (response) {
-                    if (response.flag) {
-                        $scope.reloadList(); //刷新列表
-                        alert(response.message);
-                    } else {
-                        alert(response.message);
-                    }
-                });
-            };
-            $scope.searchEntity={};//定义搜索对象
-            //条件查询
-            $scope.queryList = function (pageNum,pageSize) {
-                $http.post("../brands/findPageListByLike.do?pageNum="+pageNum+"&pageSize="+pageSize, $scope.searchEntity).success(function (response) {
-                    $scope.paginationConf.totalItems = response.total;
-                    $scope.list = response.rows;
-                });
-            }
-        });
-
-
-    </script>
+    <!-- 引入AngularJS的方法 -->
+    <script src="../js/baseJS_page.js"></script>
+    <script src="../js/myAction/service/brandService.js"></script>
+    <script src="../js/myAction/common/baseController.js"></script>
+    <script src="../js/myAction/controller/brandController.js"></script>
 
 </head>
 <body class="hold-transition skin-red sidebar-mini" ng-app="jukengkeng" ng-controller="jkkController">

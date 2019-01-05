@@ -1,0 +1,1 @@
+var app = angular.module("jukengkeng", ['pagination']); //引入分页模块,带分页功能

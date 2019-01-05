@@ -71,8 +71,6 @@ public class BrandController {
 
     @RequestMapping("/findPageListByLike")
     public pageResult findPageListByLike(@RequestBody TbBrand tbBrand,Integer pageNum,Integer pageSize){
-        System.out.println("pageNum --- >" + pageNum);
-        System.out.println("pageSize --- >" + pageSize);
         return  brandsService.findPageListByLike(tbBrand,pageNum,pageSize);
     }
 
