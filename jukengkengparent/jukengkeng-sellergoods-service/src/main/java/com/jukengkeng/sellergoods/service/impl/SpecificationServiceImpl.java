@@ -8,6 +8,7 @@ import com.jukengkeng.mapper.TbSpecificationOptionMapper;
 import com.jukengkeng.pojo.TbSpecification;
 import com.jukengkeng.pojo.TbSpecificationExample;
 import com.jukengkeng.pojo.TbSpecificationOption;
+import com.jukengkeng.pojo.TbSpecificationOptionExample;
 import com.jukengkeng.pojogroup.Specification;
 import com.jukengkeng.sellergoods.service.SpecificationService;
 import entity.pageResult;
@@ -46,6 +47,17 @@ public class SpecificationServiceImpl implements SpecificationService {
         for (TbSpecificationOption tbSpecificationOption : tbSpecificationOptions) {
             tbSpecificationOption.setSpecId(specification.getTbSpecification().getId());
             tbSpecificationOptionMapper.insert(tbSpecificationOption);
+        }
+    }
+
+    @Override
+    public void delSpecifciation(Long[] ids) {
+        for (Long id : ids) {
+            tbSpecificationMapper.deleteByPrimaryKey(id);//删除规格
+            TbSpecificationOptionExample example = new TbSpecificationOptionExample();
+            TbSpecificationOptionExample.Criteria criteria = example.createCriteria();
+            criteria.andSpecIdEqualTo(id);
+            tbSpecificationOptionMapper.deleteByExample(example);//删除规格选项
         }
     }
 }

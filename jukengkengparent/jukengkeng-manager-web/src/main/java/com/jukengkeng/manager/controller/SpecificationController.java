@@ -30,7 +30,19 @@ public class SpecificationController {
             return new result(true, "新增成功");
         } catch (Exception e) {
             e.printStackTrace();
-            return new result(false,"新增失败");
+            return new result(false, "新增失败");
+        }
+    }
+
+    //删除规格及选项
+    @RequestMapping("/del")
+    public result delSpecification(Long[] id) {
+        try {
+            specificationService.delSpecifciation(id);
+            return new result(true, "删除成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new result(false, "删除失败");
         }
     }
 

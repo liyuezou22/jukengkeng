@@ -23,11 +23,22 @@ app.controller("specificationController", function ($scope, $controller, specifi
             specificationService.addSpecification(specification).success(function (response) {
                 if (response.flag) {
                     alert(response.message);
-                    $scope.queryList($scope.paginationConf.currentPage,$scope.paginationConf.itemsPerPage);
+                    $scope.queryList($scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage);
                 } else {
                     alert(response.message);
                 }
             });
         }
+    }
+    //删除规格
+    $scope.delSpecification = function () {
+        specificationService.delSpecifciation($scope.selectIds).success(function (response) {
+            if (response.flag) {
+                alert(response.message);
+                $scope.queryList($scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage);
+            } else {
+                alert(response.message);
+            }
+        });
     }
 });
