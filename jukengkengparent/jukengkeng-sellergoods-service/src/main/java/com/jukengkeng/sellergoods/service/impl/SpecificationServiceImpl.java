@@ -60,4 +60,34 @@ public class SpecificationServiceImpl implements SpecificationService {
             tbSpecificationOptionMapper.deleteByExample(example);//删除规格选项
         }
     }
+
+    @Override
+    public Specification findSpecificationByID(Long id) {
+        Specification specification = new Specification();
+        //查询规格
+        TbSpecification tbSpecification = tbSpecificationMapper.selectByPrimaryKey(id);
+        specification.setTbSpecification(tbSpecification);
+        //查询规格选项
+        TbSpecificationOptionExample example = new TbSpecificationOptionExample();
+        TbSpecificationOptionExample.Criteria criteria = example.createCriteria();
+        criteria.andSpecIdEqualTo(id);
+        List<TbSpecificationOption> tbSpecificationOptions = tbSpecificationOptionMapper.selectByExample(example);
+        specification.setTbSpecificationOptions(tbSpecificationOptions);
+
+        return specification;
+    }
+
+    @Override
+    public void updateSpecification(Specification specification) {
+        //更新规格主表
+        TbSpecification tbSpecification = specification.getTbSpecification();
+        if (tbSpecification != null) {
+            tbSpecificationMapper.updateByPrimaryKey(tbSpecification);
+        }
+        //跟新规格选项表
+        List<TbSpecificationOption> tbSpecificationOptions = specification.getTbSpecificationOptions();
+        for (TbSpecificationOption tbSpecificationOption : tbSpecificationOptions) {
+            tbSpecificationOptionMapper.updateByPrimaryKey(tbSpecificationOption);
+        }
+    }
 }

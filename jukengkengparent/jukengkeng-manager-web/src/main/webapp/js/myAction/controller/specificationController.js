@@ -19,16 +19,28 @@ app.controller("specificationController", function ($scope, $controller, specifi
     }
     //新增规格选项
     $scope.addSpecification = function (specification) {
+        var id = specification.tbSpecification.id;
+        debugger
+        //判断是新增还是修改
+        if (id != null) {
+            object = specificationService.updateSpecification(specification);
+        } else {
+            object = specificationService.addSpecification(specification);
+        }
         if (confirm("是否确认保存？")) {
-            specificationService.addSpecification(specification).success(function (response) {
+            object.success(function (response) {
+                debugger
                 if (response.flag) {
+                    debugger
                     alert(response.message);
                     $scope.queryList($scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage);
                 } else {
+                    debugger
                     alert(response.message);
                 }
             });
         }
+
     }
     //删除规格
     $scope.delSpecification = function () {
@@ -39,6 +51,12 @@ app.controller("specificationController", function ($scope, $controller, specifi
             } else {
                 alert(response.message);
             }
+        });
+    }
+    //根据ID查询规格及规格选项
+    $scope.findSpecificaitonByID = function (id) {
+        specificationService.findSpecificaitonByID(id).success(function (response) {
+            $scope.entity = response;
         });
     }
 });

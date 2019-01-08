@@ -46,4 +46,21 @@ public class SpecificationController {
         }
     }
 
+    //根据ID查询规格及规格选项
+    @RequestMapping("/findSpecificationByID")
+    public Specification findSpecificationByID(Long id) {
+        return specificationService.findSpecificationByID(id);
+    }
+
+    //更新规格及规格选项
+    @RequestMapping("/updateSpecification")
+    public result updateSoecification(@RequestBody Specification specification) {
+        try {
+            specificationService.updateSpecification(specification);
+            return new result(true, "修改成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new result(false, "修改失败");
+        }
+    }
 }

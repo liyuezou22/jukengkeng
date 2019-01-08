@@ -13,4 +13,10 @@ public interface SpecificationService {
 
     //删除规格及规格选项
     void delSpecifciation(Long[] id);
+
+    //根据ID查询规格及规格选项
+    Specification findSpecificationByID(Long id);
+
+    //更新规格及规格选项
+    void updateSpecification(Specification specification);
 }
