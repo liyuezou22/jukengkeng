@@ -14,14 +14,18 @@ app.service("brandService", function ($http) {
     }
     //根据主键查询
     this.findByID = function (id) {
-        return  $http.post("../brands/findTbBrand.do?rowid=" + id);
+        return $http.post("../brands/findTbBrand.do?rowid=" + id);
     }
     //删除
     this.del = function (selectIds) {
         return $http.post("../brands/del.do?ids=" + selectIds);
     }
     //调减查询
-    this.queryList = function (pageNum, pageSize,searchEntity) {
-        return  $http.post("../brands/findPageListByLike.do?pageNum=" + pageNum + "&pageSize=" + pageSize,searchEntity);
+    this.queryList = function (pageNum, pageSize, searchEntity) {
+        return $http.post("../brands/findPageListByLike.do?pageNum=" + pageNum + "&pageSize=" + pageSize, searchEntity);
+    }
+    //查询品牌下拉
+    this.selectBrandOption = function () {
+        return $http.post("../brands/selectOptionList.do");
     }
 });
