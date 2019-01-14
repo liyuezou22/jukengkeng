@@ -15,6 +15,7 @@ import entity.pageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class SpecificationServiceImpl implements SpecificationService {
@@ -89,5 +90,10 @@ public class SpecificationServiceImpl implements SpecificationService {
         for (TbSpecificationOption tbSpecificationOption : tbSpecificationOptions) {
             tbSpecificationOptionMapper.updateByPrimaryKey(tbSpecificationOption);
         }
+    }
+
+    @Override
+    public List<Map> selectSpecificationOption() {
+        return tbSpecificationMapper.selectSpecificationOption();
     }
 }

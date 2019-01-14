@@ -23,4 +23,9 @@ app.service("specificationService", function ($http) {
     this.updateSpecification = function (specification) {
         return $http.post("../specification/updateSpecification.do", specification);
     }
+    
+    //获取规格下拉列表数据
+    this.selectSpecificationOption = function () {
+        return $http.post("../specification/selectSpecificationOption.do");
+    }
 });

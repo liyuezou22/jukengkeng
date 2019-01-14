@@ -3,6 +3,8 @@ package com.jukengkeng.mapper;
 import com.jukengkeng.pojo.TbSpecification;
 import com.jukengkeng.pojo.TbSpecificationExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface TbSpecificationMapper {
@@ -27,4 +29,6 @@ public interface TbSpecificationMapper {
     int updateByPrimaryKeySelective(TbSpecification record);
 
     int updateByPrimaryKey(TbSpecification record);
+
+    List<Map> selectSpecificationOption();
 }

@@ -27,6 +27,7 @@
     <script src="../js/baseJS_page.js"></script>
     <script src="../js/myAction/common/baseController.js"></script>
     <script src="../js/myAction/service/brandService.js"></script>
+    <script src="../js/myAction/service/specificationService.js"></script>
     <script src="../js/myAction/service/typeTemplateService.js"></script>
     <script src="../js/myAction/controller/typeTemplateController.js"></script>
     <script src="../plugins/select2/angular-select2.js"></script>
@@ -35,7 +36,7 @@
 </head>
 
 <body class="hold-transition skin-red sidebar-mini" ng-app="jukengkeng" ng-controller="typeTemplateController"
-      ng-init="selectBrandOption()">
+      ng-init="selectBrandOption();selectSpecificationOption()">
 <!-- .box-body -->
 
 <div class="box-header with-border">
