@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
-@RequestMapping("brands")
+@RequestMapping("/brands")
 public class BrandController {
     @Reference
     private BrandsService brandsService;
@@ -70,8 +71,13 @@ public class BrandController {
     }
 
     @RequestMapping("/findPageListByLike")
-    public pageResult findPageListByLike(@RequestBody TbBrand tbBrand,Integer pageNum,Integer pageSize){
-        return  brandsService.findPageListByLike(tbBrand,pageNum,pageSize);
+    public pageResult findPageListByLike(@RequestBody TbBrand tbBrand, Integer pageNum, Integer pageSize) {
+        return brandsService.findPageListByLike(tbBrand, pageNum, pageSize);
+    }
+
+    @RequestMapping("/selectOptionList")
+    public List<Map> selectOptionList() {
+        return brandsService.findOptionList();
     }
 
 }

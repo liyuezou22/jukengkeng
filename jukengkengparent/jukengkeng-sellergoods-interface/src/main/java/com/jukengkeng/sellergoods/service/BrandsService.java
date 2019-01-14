@@ -3,6 +3,7 @@ package com.jukengkeng.sellergoods.service;
 import com.jukengkeng.pojo.TbBrand;
 import entity.pageResult;
 import java.util.List;
+import java.util.Map;
 
 public interface BrandsService {
     //查询所有品牌
@@ -19,4 +20,6 @@ public interface BrandsService {
     public void deleteTbBrands(Long[] ids);
     //模糊查询
     public pageResult findPageListByLike(TbBrand tbBrand,int pageNum,int pageSize);
+    //查询品牌下拉列表
+    List<Map> findOptionList();
 }
