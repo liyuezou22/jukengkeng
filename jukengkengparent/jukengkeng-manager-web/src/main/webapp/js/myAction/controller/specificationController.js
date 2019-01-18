@@ -20,7 +20,6 @@ app.controller("specificationController", function ($scope, $controller, specifi
     //新增规格选项
     $scope.addSpecification = function (specification) {
         var id = specification.tbSpecification.id;
-        debugger
         //判断是新增还是修改
         if (id != null) {
             object = specificationService.updateSpecification(specification);
@@ -31,11 +30,11 @@ app.controller("specificationController", function ($scope, $controller, specifi
             object.success(function (response) {
                 debugger
                 if (response.flag) {
-                    debugger
+
                     alert(response.message);
                     $scope.queryList($scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage);
                 } else {
-                    debugger
+
                     alert(response.message);
                 }
             });

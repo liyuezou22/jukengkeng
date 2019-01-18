@@ -1,4 +1,4 @@
-app.controller("typeTemplateController", function ($scope, $controller, typeTemplateService,brandService,specificationService) {
+app.controller("typeTemplateController", function ($scope, $controller, typeTemplateService, brandService, specificationService) {
     $controller("baseController", {$scope: $scope});
     //定义查询对象
     $scope.searchEntity = {};
@@ -21,10 +21,15 @@ app.controller("typeTemplateController", function ($scope, $controller, typeTemp
 
     $scope.specificationList = {data: []};
     //获取规格下拉列表
-   $scope.selectSpecificationOption = function () {
-       specificationService.selectSpecificationOption().success(function (response) {
-            $scope.specificationList ={data:response};
-       });
-   } 
+    $scope.selectSpecificationOption = function () {
+        specificationService.selectSpecificationOption().success(function (response) {
+            $scope.specificationList = {data: response};
+        });
+    }
+
+    //新增扩展属性
+    $scope.addCustomAttributeItems = function () {
+        $scope.entity.customAttributeItems.push({});
+    }
 
 });

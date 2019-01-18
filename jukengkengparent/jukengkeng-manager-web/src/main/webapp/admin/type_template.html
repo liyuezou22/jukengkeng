@@ -53,7 +53,7 @@
             <div class="form-group form-inline">
                 <div class="btn-group">
                     <button type="button" class="btn btn-default" title="新建" data-toggle="modal"
-                            data-target="#editModal"><i class="fa fa-file-o"></i> 新建
+                            data-target="#editModal" ng-click="entity={'customAttributeItems':[]}"><i class="fa fa-file-o"></i> 新建
                     </button>
                     <button type="button" class="btn btn-default" title="删除"><i class="fa fa-trash-o"></i> 删除</button>
 
@@ -108,7 +108,6 @@
     </div>
     <!-- 数据表格 /-->
 
-
 </div>
 <!-- /.box-body -->
 
@@ -126,20 +125,21 @@
                 <table class="table table-bordered table-striped" width="800px">
                     <tr>
                         <td>商品类型</td>
-                        <td><input class="form-control" placeholder="商品类型"></td>
+                        <td><input class="form-control" ng-model="entity.name" placeholder="商品类型"></td>
                     </tr>
                     <tr>
                         <td>关联品牌</td>
                         <td>
                             <input select2 select2-model="entity.brandIds" config="brandList" multiple
-                                    placeholder="选择品牌（可多选）" class="form-control" type="text"/>
+                                   placeholder="选择品牌（可多选）" class="form-control" type="text"/>
 
                         </td>
                     </tr>
                     <tr>
                         <td>关联规格</td>
                         <td>
-
+                            <input select2 select2-model="entity.specIds" config="specificationList" multiple
+                                   placeholder="选择规格（可多选）" class="form-control" type="text"/>
                         </td>
                     </tr>
 
@@ -147,8 +147,8 @@
                         <td>扩展属性</td>
                         <td>
                             <div class="btn-group">
-                                <button type="button" class="btn btn-default" title="新增扩展属性"><i
-                                        class="fa fa-file-o"></i> 新增扩展属性
+                                <button type="button" class="btn btn-default" title="新增扩展属性" ng-click="addCustomAttributeItems()">
+                                    <i class="fa fa-file-o">新增扩展属性</i>
                                 </button>
 
                             </div>
@@ -160,19 +160,10 @@
                                     <td>操作</td>
                                 </tr>
                                 </thead>
-                                <tbody>
+                                <tbody ng-repeat="pojo in entity.customAttributeItems">
                                 <tr>
                                     <td><input type="checkbox" class="icheckbox_square-blue"></td>
-                                    <td><input class="form-control" placeholder="属性名称"></td>
-                                    <td>
-                                        <button type="button" class="btn btn-default" title="删除"><i
-                                                class="fa fa-trash-o"></i> 删除
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" class="icheckbox_square-blue"></td>
-                                    <td><input class="form-control" placeholder="属性名称"></td>
+                                    <td><input class="form-control" placeholder="属性名称" ng-model="pojo.customAttributeItems"></td>
                                     <td>
                                         <button type="button" class="btn btn-default" title="删除"><i
                                                 class="fa fa-trash-o"></i> 删除
