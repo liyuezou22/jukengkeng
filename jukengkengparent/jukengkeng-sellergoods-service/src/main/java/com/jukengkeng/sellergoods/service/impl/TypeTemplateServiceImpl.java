@@ -9,6 +9,7 @@ import com.jukengkeng.pojo.TbTypeTemplate;
 import com.jukengkeng.pojo.TbTypeTemplateExample;
 import com.jukengkeng.sellergoods.service.TypeTemplateService;
 import entity.pageResult;
+import entity.result;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -30,5 +31,11 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
         Page<TbTypeTemplate> tbTypeTemplates = (Page<TbTypeTemplate>) tbTypeTemplateMapper.selectByExample(example);
 
         return new pageResult(tbTypeTemplates.getTotal(),tbTypeTemplates.getResult());
+    }
+
+    @Override
+    public void saveTypeTemplate(TbTypeTemplate tbTypeTemplate) {
+        //将参数转换为json格式存储
+        tbTypeTemplateMapper.insert(tbTypeTemplate);
     }
 }

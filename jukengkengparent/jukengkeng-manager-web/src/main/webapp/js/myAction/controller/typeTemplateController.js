@@ -11,7 +11,7 @@ app.controller("typeTemplateController", function ($scope, $controller, typeTemp
     }
 
     $scope.brandList = {data: []};
-    //获取分页下拉
+    //获取品牌下拉
     $scope.selectBrandOption = function () {
         brandService.selectBrandOption().success(function (response) {
             $scope.brandList = {data: response};
@@ -30,6 +30,13 @@ app.controller("typeTemplateController", function ($scope, $controller, typeTemp
     //新增扩展属性
     $scope.addCustomAttributeItems = function () {
         $scope.entity.customAttributeItems.push({});
+    }
+
+    //保存商品类型模板
+    $scope.saveTypeTemplate = function (entity) {
+        typeTemplateService.saveTypeTemplate(entity).success(function (response) {
+            debugger
+        });
     }
 
 });

@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.jukengkeng.pojo.TbTypeTemplate;
 import com.jukengkeng.sellergoods.service.TypeTemplateService;
 import entity.pageResult;
+import entity.result;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +23,19 @@ public class TypeTemplateController {
 
     @RequestMapping("/findPageList")
     public pageResult findPageList(@RequestBody TbTypeTemplate tbTypeTemplate, Integer pageNum, Integer pageSize) {
-        return typeTemplateService.findPageList(tbTypeTemplate,pageNum,pageSize);
+        return typeTemplateService.findPageList(tbTypeTemplate, pageNum, pageSize);
     }
+
+    @RequestMapping("/saveTypeTemplate")
+    public result saveTypeTemplate(@RequestBody TbTypeTemplate tbTypeTemplate) {
+        try {
+            typeTemplateService.saveTypeTemplate(tbTypeTemplate);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new result(false, "保存失败");
+        }
+        return new result(true, "保存成功");
+    }
+
 
 }
