@@ -17,4 +17,16 @@ public interface TypeTemplateService {
 
     //保存
     void saveTypeTemplate(TbTypeTemplate tbTypeTemplate);
+
+    //删除
+    void deleteTypeTemplate(Long[] ids);
+
+    //更具ID查询
+    TbTypeTemplate queryTypeTemplateByID(Long id);
+
+    //根据规格模板名称查询
+    pageResult findTypeTemplateByName(String name, Integer pageNum, Integer pageSize);
+
+    //修改规格模板
+    void updateTypeTemplate(TbTypeTemplate tbTypeTemplate);
 }

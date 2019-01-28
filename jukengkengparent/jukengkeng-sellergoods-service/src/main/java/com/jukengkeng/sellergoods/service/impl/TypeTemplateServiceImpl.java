@@ -21,16 +21,16 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
 
     @Override
     public pageResult findPageList(TbTypeTemplate tbTypeTemplate, Integer pageNum, Integer pageSize) {
-        PageHelper.startPage(pageNum,pageSize);
+        PageHelper.startPage(pageNum, pageSize);
         TbTypeTemplateExample example = new TbTypeTemplateExample();
         TbTypeTemplateExample.Criteria criteria = example.createCriteria();
-        String name =  tbTypeTemplate.getName();
-        if(!StringUtils.isEmpty(name)){
+        String name = tbTypeTemplate.getName();
+        if (!StringUtils.isEmpty(name)) {
             criteria.andNameEqualTo(name);
         }
         Page<TbTypeTemplate> tbTypeTemplates = (Page<TbTypeTemplate>) tbTypeTemplateMapper.selectByExample(example);
 
-        return new pageResult(tbTypeTemplates.getTotal(),tbTypeTemplates.getResult());
+        return new pageResult(tbTypeTemplates.getTotal(), tbTypeTemplates.getResult());
     }
 
     @Override
@@ -38,4 +38,34 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
         //将参数转换为json格式存储
         tbTypeTemplateMapper.insert(tbTypeTemplate);
     }
+
+    @Override
+    public void deleteTypeTemplate(Long[] ids) {
+        for (Long id : ids) {
+            tbTypeTemplateMapper.deleteByPrimaryKey(id);
+        }
+    }
+
+    @Override
+    public TbTypeTemplate queryTypeTemplateByID(Long id) {
+        return tbTypeTemplateMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public pageResult findTypeTemplateByName(String name, Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        TbTypeTemplateExample tbTypeTemplateExample = new TbTypeTemplateExample();
+        TbTypeTemplateExample.Criteria criteria = tbTypeTemplateExample.createCriteria();
+        criteria.andNameEqualTo(name);
+        Page<TbTypeTemplate> tbTypeTemplates = (Page<TbTypeTemplate>) tbTypeTemplateMapper.selectByExample(tbTypeTemplateExample);
+        return new pageResult(tbTypeTemplates.getTotal(), tbTypeTemplates.getResult());
+    }
+
+    @Override
+    public void updateTypeTemplate(TbTypeTemplate tbTypeTemplate) {
+        if (tbTypeTemplate != null) {
+            tbTypeTemplateMapper.updateByPrimaryKey(tbTypeTemplate);
+        }
+    }
+
 }

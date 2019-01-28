@@ -30,12 +30,46 @@ public class TypeTemplateController {
     public result saveTypeTemplate(@RequestBody TbTypeTemplate tbTypeTemplate) {
         try {
             typeTemplateService.saveTypeTemplate(tbTypeTemplate);
+            return new result(true, "保存成功");
         } catch (Exception e) {
             e.printStackTrace();
             return new result(false, "保存失败");
         }
-        return new result(true, "保存成功");
     }
 
+    @RequestMapping("/delTypeTemplate")
+    public result delTypeTemplate(Long[] ids) {
+        try {
+            typeTemplateService.deleteTypeTemplate(ids);
+            return new result(true, "删除成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new result(false, "删除失败");
+        }
+    }
 
+    @RequestMapping("/queryTypeTemplateByID")
+    public TbTypeTemplate queryTypeTemplateByID(Long id) {
+        return typeTemplateService.queryTypeTemplateByID(id);
+    }
+
+    @RequestMapping("/queryTypeTemplateByName")
+    public pageResult queryTypeTemplateByName(Integer pageNum, Integer pageSize,@RequestBody TbTypeTemplate tbTypeTemplate) {
+        System.out.println(tbTypeTemplate.getName());
+        if(tbTypeTemplate.getName() != null){
+            return typeTemplateService.findTypeTemplateByName(tbTypeTemplate.getName(), pageNum, pageSize);
+        }
+        return null;
+    }
+
+    @RequestMapping("/updateTypeTemplate")
+    public result updateTypeTemplate(@RequestBody TbTypeTemplate tbTypeTemplate){
+        try {
+            typeTemplateService.updateTypeTemplate(tbTypeTemplate);
+            return new result(true,"更新成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            return new result(false,"更新失败");
+        }
+    }
 }
