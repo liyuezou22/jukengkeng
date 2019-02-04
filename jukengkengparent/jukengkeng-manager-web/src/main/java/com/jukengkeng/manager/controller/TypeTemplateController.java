@@ -55,7 +55,6 @@ public class TypeTemplateController {
 
     @RequestMapping("/queryTypeTemplateByName")
     public pageResult queryTypeTemplateByName(Integer pageNum, Integer pageSize,@RequestBody TbTypeTemplate tbTypeTemplate) {
-        System.out.println(tbTypeTemplate.getName());
         if(tbTypeTemplate.getName() != null){
             return typeTemplateService.findTypeTemplateByName(tbTypeTemplate.getName(), pageNum, pageSize);
         }
