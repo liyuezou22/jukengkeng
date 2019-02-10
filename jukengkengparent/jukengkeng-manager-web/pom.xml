@@ -12,6 +12,18 @@
     <packaging>war</packaging>
 
     <dependencies>
+        <!-- 引入依赖 -->
+        <dependency>
+            <groupId>com.jukengkeng</groupId>
+            <artifactId>jukengkeng-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jukengkeng</groupId>
+            <artifactId>jukengkeng-sellergoods-interface</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -79,16 +91,14 @@
             <artifactId>servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
+        <!-- 导入身份认证 spring security-->
         <dependency>
-            <groupId>com.jukengkeng</groupId>
-            <artifactId>jukengkeng-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
         </dependency>
-
         <dependency>
-            <groupId>com.jukengkeng</groupId>
-            <artifactId>jukengkeng-sellergoods-interface</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
         </dependency>
     </dependencies>
     <build>
