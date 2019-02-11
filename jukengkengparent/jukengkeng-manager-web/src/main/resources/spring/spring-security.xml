@@ -23,6 +23,8 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
         <headers>
             <frame-options policy="SAMEORIGIN"/>
         </headers>
+        <!-- 注销:如下不做其他配置会自动生成/logout退出地址，直接引用即可 -->
+        <logout/>
     </http>
 
     <!-- 配置认证管理器 -->

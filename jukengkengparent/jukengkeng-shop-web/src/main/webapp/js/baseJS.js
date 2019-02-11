@@ -1,0 +1,1 @@
+var app = angular.module("jukengkeng", []); //不带分页功能

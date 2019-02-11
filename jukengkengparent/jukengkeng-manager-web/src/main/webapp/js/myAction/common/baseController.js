@@ -1,4 +1,4 @@
-app.controller("baseController",function ($scope) {
+app.controller("baseController", function ($scope) {
     //分页控件配置
     $scope.paginationConf = {
         currentPage: 1,//当前页数
@@ -32,15 +32,28 @@ app.controller("baseController",function ($scope) {
     };
 
     //JSON转换
-    $scope.jsonToString = function (jsonString,key) {
+    $scope.jsonToString = function (jsonString, key) {
         var json = JSON.parse(jsonString);
         var value = "";
-        for(var i = 0;i<json.length;i++){
-            if(i>0){
-                value +=",";
+        for (var i = 0; i < json.length; i++) {
+            if (i > 0) {
+                value += ",";
             }
-            value+=json[i][key];
+            value += json[i][key];
         }
         return value;
+    }
+
+    //显示状态
+    $scope.statusToChina = function (status) {
+        if (status == 0) {
+            return "未审核";
+        } else if (status == 1) {
+            return "已审核";
+        } else if (status == 2) {
+            return "审核未通过";
+        } else if (status == 3) {
+            return "关闭";
+        }
     }
 });
