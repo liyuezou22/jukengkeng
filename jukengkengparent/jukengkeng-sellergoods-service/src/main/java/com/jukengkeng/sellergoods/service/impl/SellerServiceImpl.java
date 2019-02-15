@@ -8,6 +8,7 @@ import com.jukengkeng.pojo.TbSeller;
 import com.jukengkeng.pojo.TbSellerExample;
 import com.jukengkeng.sellergoods.service.SellerService;
 import entity.pageResult;
+import entity.result;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -39,5 +40,17 @@ public class SellerServiceImpl implements SellerService {
         }
        Page<TbSeller> tbSellers = (Page<TbSeller>) tbSellerMapper.selectByExample(tbSellerExample);
         return new pageResult(tbSellers.getTotal(),tbSellers.getResult());
+    }
+
+    @Override
+    public TbSeller querySellerByID(String rowid) {
+        return  tbSellerMapper.selectByPrimaryKey(rowid);
+    }
+
+    @Override
+    public void changeStatus(String rowid, String status) {
+        TbSeller tbSeller = tbSellerMapper.selectByPrimaryKey(rowid);
+        tbSeller.setStatus(status);
+        tbSellerMapper.updateByPrimaryKey(tbSeller);
     }
 }

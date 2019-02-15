@@ -11,4 +11,25 @@ app.controller("sellerController",function ($scope,$controller,sellerService) {
         });
     }
 
+    //根据ID查询商家信息
+    $scope.querySellerByID = function (id) {
+        sellerService.querySellerByID(id).success(function (response) {
+            $scope.entity = response;
+        });
+    }
+
+    //修改审核状态
+    $scope.changeStatus = function (id,status) {
+        debugger
+        sellerService.changeStatus(id,status).success(function (response) {
+            debugger
+            if(response.flag){
+                $scope.reloadList();
+                alert(response.message);
+            }else{
+                alert(response.message);
+            }
+        });
+    }
+
 });
