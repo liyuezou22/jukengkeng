@@ -1,4 +1,5 @@
 app.controller("baseController", function ($scope) {
+    $scope.reload = true;
     //分页控件配置
     $scope.paginationConf = {
         currentPage: 1,//当前页数
@@ -6,7 +7,14 @@ app.controller("baseController", function ($scope) {
         itemsPerPage: 10,//需要查询的数
         perPageOptions: [10, 20, 30, 40, 50],
         onChange: function () {
-            $scope.reloadList();
+            if(!$scope.reload) {
+                return;
+            }
+            $scope.reloadList();//重新加载 这个方法会重复调用两次
+            $scope.reload = false;
+            setTimeout(function() {
+                $scope.reload = true;
+            }, 200);
         }
     };
 
